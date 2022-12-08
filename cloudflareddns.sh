@@ -11,8 +11,9 @@ ipAddr="$4"
 
 recordType="AAAA"
 
-res=$(curl http://api.bilibili.com/x/web-interface/zone)
+res=$(curl -6 -s -X GET http://api.bilibili.com/x/web-interface/zone)
 ipAddr=$(echo "$res" | jq -r ".data.addr")
+
 
 listDnsApi="https://api.cloudflare.com/client/v4/zones/${username}/dns_records?type=${recordType}&name=${hostname}"
 createDnsApi="https://api.cloudflare.com/client/v4/zones/${username}/dns_records"
